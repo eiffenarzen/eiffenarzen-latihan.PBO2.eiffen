@@ -1,3 +1,122 @@
+// Model untuk mengelola data tugas
+class TugasModel {
+    constructor() {
+        this.tugas = []; // Format: [{ id: ..., nama: ... }]
+    }
+
+    tambahTugas(id, nama) {
+        this.tugas.push({ id, nama });
+    }
+
+    getTugas() {
+        return this.tugas;
+    }
+}
+
+// View untuk menampilkan data tugas
+class TugasView {
+    constructor() {
+        this.app = document.getElementById('app');
+        this.form = this.buatForm();
+        this.tabelTugas = this.buatTabelTugas();
+    }
+
+    buatForm() {
+        const form = document.createElement('form');
+
+        const inputId = document.createElement('input');
+        inputId.type = 'text';
+        inputId.placeholder = 'Masukkan ID';
+        inputId.required = true;
+        inputId.name = 'id';
+
+        const inputNama = document.createElement('input');
+        inputNama.type = 'text';
+        inputNama.placeholder = 'Masukkan Nama';
+        inputNama.required = true;
+        inputNama.name = 'nama';
+
+        const tombol = document.createElement('button');
+        tombol.textContent = 'Tambah';
+
+        form.appendChild(inputId);
+        form.appendChild(inputNama);
+        form.appendChild(tombol);
+
+        this.app.appendChild(form);
+        return form;
+    }
+
+    buatTabelTugas() {
+        const table = document.createElement('table');
+        table.border = '1';
+
+        // Header tabel
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        const idHeader = document.createElement('th');
+        idHeader.textContent = 'ID';
+        const namaHeader = document.createElement('th');
+        namaHeader.textContent = 'Nama';
+        headerRow.appendChild(idHeader);
+        headerRow.appendChild(namaHeader);
+        thead.appendChild(headerRow);
+
+        const tbody = document.createElement('tbody');
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        this.app.appendChild(table);
+        return tbody;
+    }
+
+    render(tugas) {
+        // Render tabel tugas
+        this.tabelTugas.innerHTML = '';
+        tugas.forEach((tugasItem) => {
+            const row = document.createElement('tr');
+            const idCell = document.createElement('td');
+            idCell.textContent = tugasItem.id;
+            const namaCell = document.createElement('td');
+            namaCell.textContent = tugasItem.nama;
+            row.appendChild(idCell);
+            row.appendChild(namaCell);
+            this.tabelTugas.appendChild(row);
+        });
+    }
+}
+
+// Controller untuk menghubungkan Model dan View
+class TugasController {
+    constructor(model, view) {
+        this.model = model;
+        this.view = view;
+
+        this.view.form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const id = e.target.querySelector('input[name="id"]').value;
+            const nama = e.target.querySelector('input[name="nama"]').value;
+
+            if (id && nama) {
+                this.model.tambahTugas(id, nama);
+                this.view.render(this.model.getTugas());
+                e.target.reset(); // Reset form setelah submit
+            }
+        });
+    }
+}
+
+// Inisialisasi
+document.addEventListener('DOMContentLoaded', () => {
+    const app = document.createElement('div');
+    app.id = 'app';
+    document.body.appendChild(app);
+
+    const model = new TugasModel();
+    const view = new TugasView();
+    new TugasController(model, view);
+});
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
