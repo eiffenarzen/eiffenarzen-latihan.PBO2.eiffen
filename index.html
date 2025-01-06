@@ -1,160 +1,442 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Tugas dengan ID</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        input {
-            margin-right: 10px;
-            padding: 5px;
-        }
-        button {
-            padding: 5px 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zenn SkateShop</title>
+  <style>
+    body {
+  font-family: 'Arial', sans-serif;
+  background: #333; /* Warna abu-abu gelap */
+  color: #fff; /* Warna teks putih */
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #444; /* Warna abu-abu */
+  color: white;
+  padding: 20px 10px;
+  text-align: center;
+}
+
+.container {
+  margin: 20px auto;
+  max-width: 800px;
+  background: #222; /* Warna abu-abu gelap */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.login-card {
+  background: #111; /* Warna abu-abu lebih gelap */
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  text-align: center;
+
+}
+
+h1, h2 {
+  color: #fff; /* Teks putih */
+}
+
+h2 {
+  font-size: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #ccc; /* Warna abu-abu terang */
+}
+
+.form-group input {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #555; /* Warna abu-abu */
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #222; /* Background abu-abu gelap */
+  color: #fff; /* Teks putih */
+  margin-bottom: 20px;
+}
+
+button {
+  width: 100%;
+  margin-bottom: 30px;
+  padding: 12px;
+  border: none;
+  background-color: #555; /* Abu-abu */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #777; /* Warna abu-abu lebih terang */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+    .hidden {
+      display: none;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Memberikan efek bayangan ringan */
+    }
+    .menu-item img {
+      width: 350px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .menu-item h4 {
+    color: #333; /* Warna monokrom untuk nama makanan */
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    }
+
+.menu-item p {
+    color: #555; /* Warna monokrom untuk harga */
+    font-size: 12px;
+    margin-bottom: 10px;
+    }
+
+    .menu-item button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      border: none;
+      background-color: #333;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    .menu-item button:hover {
+      background-color: #555;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #f9f9f9;
+      margin: 5px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .form-group button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+    }
+
+  .cart-item {
+  background-color: #222; /* Warna abu-abu gelap */
+  color: #fff; /* Warna teks putih */
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: 1px solid #444; /* Warna abu-abu untuk border */
+}
+
+#receipt {
+    background-color: #222; /* Warna abu-abu gelap */
+    color: #fff; /* Warna teks putih */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    text-align: left;
+  }
+
+  #receipt h2 {
+    color: #ccc; /* Warna abu-abu terang */
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  #receipt-content p {
+    margin: 5px 0;
+    color: #eee; /* Warna abu-abu muda */
+  }
+
+  #receipt-content .item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #555; /* Garis pemisah */
+  }
+
+  #receipt-content .total {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+    border-top: 1px solid #777; /* Garis pemisah total */
+    padding-top: 10px;
+  }
+
+  button {
+    background-color: #444;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+  }
+
+  button:hover {
+    background-color: #555;
+  }
+
+  </style>
 </head>
 <body>
-    <div id="app"></div>
-    <script>
-        // Model untuk mengelola data tugas
-        class TugasModel {
-            constructor() {
-                this.tugas = []; // Format: [{ id: ..., nama: ... }]
-            }
+  <header>
+    <h1>Zenn SkateShop</h1>
+  </header>
 
-            tambahTugas(id, nama) {
-                this.tugas.push({ id, nama });
-            }
+  <!-- Login Form -->
+  <div id="login-form" class="container">
+    <div class="login-card">
+      <h2>Login</h2>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Masukkan username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Masukkan password">
+      </div>
+      <button onclick="login()">Login</button>
+    </div>
+  </div>
 
-            getTugas() {
-                return this.tugas;
-            }
-        }
+  <!-- Menu Form -->
+  <div id="menu-form" class="hidden container">
+    <h2>you should check it</h2>
+    <div class="menu-grid" id="menu-grid">
+      <!-- Menu items akan ditambahkan melalui JavaScript -->
+    </div>
+    <button onclick="showCart()">Lihat Keranjang</button>
+  </div>
 
-        // View untuk menampilkan data tugas
-        class TugasView {
-            constructor() {
-                this.app = document.getElementById('app');
-                this.form = this.buatForm();
-                this.tabelTugas = this.buatTabelTugas();
-            }
+  <!-- Keranjang dan Pembayaran -->
+  <div id="cart-form" class="hidden container">
+    <h2>Keranjang Belanja</h2>
+    <ul id="cart-list"></ul>
+    <p><strong>Total:</strong> <span id="total-price">Rp 0</span></p>
+    <div class="form-group">
+      <label for="amount-paid">Jumlah Uang yang Diterima</label>
+      <input type="number" id="amount-paid" placeholder="Masukkan jumlah uang">
+    </div>
+    <button onclick="checkout()">Bayar</button>
+    <button onclick="backToMenu()">Kembali ke Menu</button>
+  </div>
+  
+  <div id="receipt" class="hidden container">
+    <h2>Nota Belanja</h2>
+    <div id="receipt-content"></div>
+    <button onclick="printReceipt()">Cetak Nota</button>
+    <button onclick="finishTransaction()">Selesai</button>
+  </div>  
 
-            buatForm() {
-                const form = document.createElement('form');
+  <script>
+    let total = 0;
+    const cart = [];
+    const username = "admin";
+    const password = "123";
 
-                const inputId = document.createElement('input');
-                inputId.type = 'text';
-                inputId.placeholder = 'Masukkan ID';
-                inputId.required = true;
-                inputId.name = 'id';
+    const menuItems = [
+      { name: "Deck Japanese Fish", price: 1100000, img: "https://i.pinimg.com/736x/49/dc/4c/49dc4ccaef7abfb82aa2a4347f43ac04.jpg" },
+      { name: "Deck Supreme", price: 3900000, img: "https://i.pinimg.com/736x/7f/f4/8a/7ff48ad79ca06a56ea818017cf973b98.jpg" },
+      { name: "Deck Wolf", price: 1000000, img: "https://i.pinimg.com/736x/f8/1c/6e/f81c6e6d5b244c4681b5fdde1908340f.jpg" },
+      { name: "Deck Godzilla x Santa Cruz", price: 3400000, img: "https://www.sk8ordie.co.uk/wp-content/uploads/2024/11/SC_Godzilla_Popsicle_GodzillaObrienReaper_SC180_Bottom-300x300.jpeg" },
+      { name: "Hardware Venom", price: 210000, img: "https://i.pinimg.com/736x/cd/18/67/cd18678a23427c5c0cd389d6886b878e.jpg" },
+      { name: "Hardware Independent", price: 100000, img: "https://i.pinimg.com/736x/42/58/ab/4258ab0f97045e005a5e37536e8662f0.jpg" },
+      { name: "Trucks Independent", price: 900000, img: "https://i.pinimg.com/736x/36/a9/3d/36a93d9722ec3826095bacaa49013066.jpg" },
+      { name: "Trucks Krux", price: 850000, img: "https://i.pinimg.com/736x/5c/92/7a/5c927abed05e9287a5ac46ce5c8a8de6.jpg" },
+      { name: "Wheels ORBS", price: 430000, img: "https://i.pinimg.com/736x/00/1e/93/001e939664f235b20e7dae0526cc10d9.jpg" },
+      { name: "Wheels SpitFire", price: 700000, img: "https://i.pinimg.com/736x/87/1c/de/871cde3eacace3d466eb3ea43714ea94.jpg" },
+      { name: "Bearing ABEC-7", price: 180000, img: "https://i.pinimg.com/736x/8f/6e/0e/8f6e0efeefa29f1a650cf5ecbadf0ec3.jpg" },
+      { name: "Bearing Burners", price: 328000, img: "https://i.pinimg.com/736x/9e/56/34/9e5634954c28fd444cb134a1a6c96f01.jpg" },
+      { name: "EC-Grip Tape", price: 110000, img: "https://i.pinimg.com/736x/02/69/39/0269390fc34c15948c7ec20df1552e18.jpg" },
+      { name: "Paris Truck Co T Tool", price: 260000, img: "https://www.paristruckco.com/cdn/shop/products/TOOL_BLK_T_2_1800x1800.jpg?v=1655144211" },
+    ];
 
-                const inputNama = document.createElement('input');
-                inputNama.type = 'text';
-                inputNama.placeholder = 'Masukkan Nama';
-                inputNama.required = true;
-                inputNama.name = 'nama';
+    function login() {
+      const inputUsername = document.getElementById("username").value;
+      const inputPassword = document.getElementById("password").value;
 
-                const tombol = document.createElement('button');
-                tombol.textContent = 'Tambah';
+      if (inputUsername === username && inputPassword === password) {
+        document.getElementById("login-form").classList.add("hidden");
+        document.getElementById("menu-form").classList.remove("hidden");
+        renderMenu();
+      } else {
+        alert("Username atau password salah!");
+      }
+    }
 
-                form.appendChild(inputId);
-                form.appendChild(inputNama);
-                form.appendChild(tombol);
+    function renderMenu() {
+      const menuGrid = document.getElementById("menu-grid");
+      menuItems.forEach((item, index) => {
+        const menuItem = document.createElement("div");
+        menuItem.classList.add("menu-item");
+        menuItem.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <h4>${item.name}</h4>
+          <p>Rp ${item.price}</p>
+          <button onclick="addToCart(${index})">Tambah</button>
+        `;
+        menuGrid.appendChild(menuItem);
+      });
+    }
 
-                this.app.appendChild(form);
-                return form;
-            }
+    function addToCart(index) {
+      const item = menuItems[index];
+      cart.push(item);
+      total += item.price;
+      alert(`${item.name} telah ditambahkan ke keranjang.`);
+    }
+   
+    function showCart() {
+      document.getElementById("menu-form").classList.add("hidden");
+      document.getElementById("cart-form").classList.remove("hidden");
 
-            buatTabelTugas() {
-                const table = document.createElement('table');
-                table.border = '1';
+      const cartList = document.getElementById("cart-list");
+      cartList.innerHTML = "";
 
-                // Header tabel
-                const thead = document.createElement('thead');
-                const headerRow = document.createElement('tr');
-                const idHeader = document.createElement('th');
-                idHeader.textContent = 'ID';
-                const namaHeader = document.createElement('th');
-                namaHeader.textContent = 'Nama';
-                headerRow.appendChild(idHeader);
-                headerRow.appendChild(namaHeader);
-                thead.appendChild(headerRow);
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.classList.add("cart-item");
+        li.textContent = `${item.name} - Rp ${item.price}`;
+        cartList.appendChild(li);
+      });
 
-                const tbody = document.createElement('tbody');
-                table.appendChild(thead);
-                table.appendChild(tbody);
+      document.getElementById("total-price").textContent = `Rp ${total}`;
+    }
 
-                this.app.appendChild(table);
-                return tbody;
-            }
+    function checkout() {
+  const amountPaid = parseInt(document.getElementById("amount-paid").value);
 
-            render(tugas) {
-                // Render tabel tugas
-                this.tabelTugas.innerHTML = '';
-                tugas.forEach((tugasItem) => {
-                    const row = document.createElement('tr');
-                    const idCell = document.createElement('td');
-                    idCell.textContent = tugasItem.id;
-                    const namaCell = document.createElement('td');
-                    namaCell.textContent = tugasItem.nama;
-                    row.appendChild(idCell);
-                    row.appendChild(namaCell);
-                    this.tabelTugas.appendChild(row);
-                });
-            }
-        }
+  if (isNaN(amountPaid)) {
+    alert("Harap masukkan jumlah uang yang diterima.");
+    return;
+  }
 
-        // Controller untuk menghubungkan Model dan View
-        class TugasController {
-            constructor(model, view) {
-                this.model = model;
-                this.view = view;
+  if (amountPaid < total) {
+    alert(`Jumlah uang tidak cukup! Anda masih membutuhkan Rp ${total - amountPaid}.`);
+    return;
+  }
 
-                this.view.form.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const id = e.target.querySelector('input[name="id"]').value;
-                    const nama = e.target.querySelector('input[name="nama"]').value;
+  const change = amountPaid - total;
+  if (change > 0) {
+    alert(`Pembayaran berhasil! Kembalian Anda adalah Rp ${change}. Terima kasih telah berbelanja!`);
+  } else {
+    alert("Pembayaran berhasil! Tidak ada kembalian. Terima kasih telah berbelanja!");
+  }
+}
+function checkout() {
+  const amountPaid = parseInt(document.getElementById("amount-paid").value);
 
-                    if (id && nama) {
-                        this.model.tambahTugas(id, nama);
-                        this.view.render(this.model.getTugas());
-                        e.target.reset(); // Reset form setelah submit
-                    }
-                });
-            }
-        }
+  if (isNaN(amountPaid)) {
+    alert("Harap masukkan jumlah uang yang diterima.");
+    return;
+  }
 
-        // Inisialisasi
-        document.addEventListener('DOMContentLoaded', () => {
-            const app = document.createElement('div');
-            app.id = 'app';
-            document.body.appendChild(app);
+  if (amountPaid < total) {
+    alert(`Jumlah uang tidak cukup! Anda masih membutuhkan Rp ${total - amountPaid}.`);
+    return;
+  }
 
-            const model = new TugasModel();
-            const view = new TugasView();
-            new TugasController(model, view);
-        });
-    </script>
+  const change = amountPaid - total;
+  if (change > 0) {
+    alert("Pembayaran berhasil!");
+  } else {
+    alert("Pembayaran berhasil!");
+  }
+  // Tampilkan nota belanja
+  showReceipt(amountPaid, change);
+}
+
+function showReceipt(amountPaid, change) {
+  const receiptDiv = document.getElementById("receipt");
+  const receiptContent = document.getElementById("receipt-content");
+
+  // Kosongkan konten nota sebelumnya
+  receiptContent.innerHTML = "";
+
+  // Tambahkan item belanja ke nota
+  cart.forEach(item => {
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "item";
+    itemDiv.innerHTML = `
+      <span>${item.name}</span>
+      <span>Rp ${item.price}</span>
+    `;
+    receiptContent.appendChild(itemDiv);
+  });
+
+  // Tambahkan total, jumlah yang diterima, dan kembalian
+  receiptContent.innerHTML += `
+    <p class="total">Total: Rp ${total}</p>
+    <p>Diterima: Rp ${amountPaid}</p>
+    <p>Kembalian: Rp ${change}</p>
+  `;
+
+  // Tampilkan nota dan sembunyikan form keranjang
+  document.getElementById("cart-form").classList.add("hidden");
+  receiptDiv.classList.remove("hidden");
+}
+
+function finishTransaction() {
+  alert("Terimakasih sudah berbelanja. Anda kembali ke halaman login.");
+  location.reload(); // Reset aplikasi setelah mencetak
+}
+
+function printReceipt() {
+  const printContents = document.getElementById("receipt").innerHTML;
+  const originalContents = document.body.innerHTML;
+
+  document.body.innerHTML = printContents;
+  window.print();
+  document.body.innerHTML = originalContents;
+
+  location.reload(); // Reset aplikasi setelah mencetak
+}
+
+    function backToMenu() {
+      document.getElementById("cart-form").classList.add("hidden");
+      document.getElementById("menu-form").classList.remove("hidden");
+    }
+  </script>
 </body>
 </html>
