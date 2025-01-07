@@ -162,7 +162,7 @@ button:hover {
   color: #fff; /* Warna teks putih */
   font-weight: bold;
   padding: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   border-radius: 5px;
   border: 1px solid #444; /* Warna abu-abu untuk border */
 }
@@ -334,14 +334,24 @@ button:hover {
       const cartList = document.getElementById("cart-list");
       cartList.innerHTML = "";
 
-      cart.forEach(item => {
-        const li = document.createElement("li");
-        li.classList.add("cart-item");
-        li.textContent = `${item.name} - Rp ${item.price}`;
-        cartList.appendChild(li);
+      cart.forEach((item, index) => {
+        const cartItem = document.createElement("li");
+        cartItem.classList.add("cart-item");
+        cartItem.innerHTML = `
+          ${item.name} - Rp ${item.price}
+          <button onclick="removeFromCart(${index})">Hapus</button>
+        `;
+        cartList.appendChild(cartItem);
       });
 
       document.getElementById("total-price").textContent = `Rp ${total}`;
+    }
+
+    function removeFromCart(index) {
+      const item = cart[index];
+      total -= item.price;
+      cart.splice(index, 1); // Remove item from cart
+      showCart(); // Update the cart display
     }
 
     function checkout() {
